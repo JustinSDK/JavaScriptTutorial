@@ -1,0 +1,40 @@
+圖書：<br>
+<select id="category">
+    <option>-- 選擇分類 --</option>
+    <option value="theory">理論基礎</option>
+    <option value="language">程式語言</option>
+    <option value="web">網頁技術</option>
+</select><br><br>
+採購：<div></div>
+
+<script type="module">    
+    import {elemsById, elemsByTag} from './mods/XD-1.2.0.js'; 
+    import {get} from './mods/Ajax.js';
+
+    function createSelect(xml) {
+        let options = xml.getElementsByTagName('option');
+        let optionHTML =
+           Array.from(options)
+                .map(option => {
+                    let text = option.textContent;
+                    let value = option.getAttribute('value');
+                    return `<option value='${value}'>${text}</option>`;
+                })
+               .join(''); 
+        return `<select>${optionHTML}</select>'`;
+    }
+
+    elemsById('category')
+        .addEvt('change', async evt => {
+            let query= {
+                category: evt.target.value, 
+                time:  Date.now()
+            };
+
+            let loadEvt = await get('books2', {query});
+            let xhr = loadEvt.target;
+            if(xhr.status === 200) {
+                elemsByTag('div').html(createSelect(xhr.responseXML));
+            }
+        });
+</script>

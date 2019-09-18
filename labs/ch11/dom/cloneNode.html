@@ -1,0 +1,18 @@
+容器一：
+<div id="container1"><img id="image" src="images/caterpillar.jpg"/></div>
+<br>
+容器二：
+<div id="container2"></div>  
+
+<script type="module">
+    function byId(id) {
+        return document.getElementById(id);
+    }
+
+    let image = byId('image');
+    let container1 = byId('container1');
+    let container2 = byId('container2');
+    image.onclick = function() {
+        container2.appendChild(image.cloneNode(true));
+    };
+</script>  

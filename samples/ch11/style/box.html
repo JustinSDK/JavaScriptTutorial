@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+      img {
+          color: #ffffff;
+          background-color: #ff0000;
+          border-width: 10px;
+          border-color: black;
+          border-style: solid;
+          width: 100px;
+          height: 82px;
+          padding: 50px;
+          margin: 10px;
+      }
+
+      div {
+          color: #ffffff;
+          background-color: #ff0000;
+          border-width: 10px;
+          border-color: black;
+          border-style: solid;
+          text-align: center;
+          width: 100px;
+          height: 82px;
+          padding: 50px;
+          margin: 10px;
+      }            
+    </style>
+</head>
+<body>
+
+<img src="https://openhome.cc/Gossip/images/caterpillar_small.jpg">
+<div>內容</div>
+<span></span>
+
+<script type="module">
+    function style(elem, prop, pseudoElt = null) {
+        return window.getComputedStyle(elem, pseudoElt)[prop];
+    }
+    
+    let img = document.querySelector('div');
+    let div = document.querySelector('div');
+
+    let imgSize = [img.offsetWidth, img.offsetHeight];
+    let divSize = [div.offsetWidth, div.offsetHeight];
+    
+    document.querySelector('span').innerHTML =
+        `img: ${imgSize}, div: ${divSize}` ;
+</script>
+</body>
+</html>

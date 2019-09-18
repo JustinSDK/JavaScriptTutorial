@@ -1,0 +1,20 @@
+<input id="img-src" type="text"><br>
+<button id="add">新增圖片</button>
+<div id="images"></div>
+
+<script type="module">
+    import x from './mods/XD-1.1.0.js';
+
+    let doc = x(document);
+    
+    doc.elemsById('add').addEvt('click', () => {
+        x('img').toElemCollection()
+                .attr('src', doc.elemsById('img-src').val())
+                .appendTo(doc.elemsById('images'));
+    });
+
+    doc.elemsById('images').addEvt('click', evt => {
+        x(evt.target).toElemCollection()
+                     .remove();         
+    });
+</script>

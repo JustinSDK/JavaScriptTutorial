@@ -1,0 +1,28 @@
+名稱：<input name="username">
+生日：<input name="birthday" type="date">
+
+<script type="module">
+    window.addEventListener('storage', evt => {
+        document.querySelector(`input[name='${evt.key}']`).value = evt.newValue;
+    }, false);
+
+    let usernameInput = document.querySelector("input[name='username']");
+    let birthdayInput = document.querySelector("input[name='birthday']");
+
+    usernameInput.addEventListener('blur', evt => {
+        localStorage.setItem('username', evt.target.value);
+    }, false);
+
+    birthdayInput.addEventListener('blur', evt => {
+        localStorage.setItem('birthday', evt.target.value);
+    }, false);
+
+    let username = localStorage.getItem('username');
+    let birthday = localStorage.getItem('birthday');
+    if(username) {
+        usernameInput.value = username;    
+    }
+    if(birthday) {
+        birthdayInput.value = birthday;    
+    }
+</script>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="module">
+        (async function() {
+            let moduleName = prompt('載入 a 或 b 模組？');
+            let mod;
+            switch(moduleName) {
+                case 'a':
+                    mod = await import('./mods/mod-a.js');
+                    break;
+                case 'b':
+                    mod = await import('./mods/mod-b.js');
+                    break;
+            }
+            mod.hello('Justin');
+        })();
+    </script>    
+</head>
+<body>
+    <span id="welcome"></span>
+</body>
+</html>

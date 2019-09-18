@@ -1,0 +1,37 @@
+新增書籤：<br>
+網址：<input name="url" type="text">
+<span style="color:red"></span><br>
+名稱：<input name="name" type="text">
+
+<script type="module">    
+    function params(paraObj) {
+        return Object
+                .keys(paraObj)
+                .map(name => {
+                    let paraName = encodeURIComponent(name);
+                    let paraValue = encodeURIComponent(paraObj[name]);                         
+                    return `${paraName}=${paraValue}`.replace(/%20/g, '+');
+                })
+                .join('&');
+    }
+
+    document
+        .getElementsByName('url')[0]
+        .addEventListener('blur', async evt => {
+            let query = params({ 
+                url: evt.target.value
+            });
+
+            let resp = await fetch('bookmarks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: query
+            });     
+            let text = await resp.text();
+            
+            document.querySelector('span').innerHTML = 
+                    text === 'true' ? 'URL 已存在' : '';
+        }, false);
+</script>

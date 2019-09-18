@@ -1,0 +1,26 @@
+<body id="bodyId">
+    <div id="divId">
+        <button id="btnId">按我</button>            
+    </div>
+    <span id="console"></span>
+    
+<script type="text/javascript">
+    function handler(evt) {
+        let currentTarget = evt.currentTarget;
+        let target = event.target;
+
+        document.getElementById('console').innerHTML += 
+            (
+            `<br><b>currentTarget.id:</b> ${currentTarget.id}, ` + 
+            `<b>target.id:</b> ${target.id}`
+            );
+    }
+
+    document.getElementById('bodyId')
+            .addEventListener('click', handler, false);
+    document.getElementById('divId')
+            .addEventListener('click', handler, false);    
+    document.getElementById('btnId')
+            .addEventListener('click', handler, false);   
+</script>  
+</body>

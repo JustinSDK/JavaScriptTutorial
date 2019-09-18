@@ -1,0 +1,14 @@
+<form name="form1" action="nothing">
+    輸入資料：<input name="data"> <span></span><br>
+    <button type="submit">送出</button>
+</form>  
+
+<script type="module">
+    document.form1.onsubmit = function() {
+        let input = this.data;
+        if(input.value.length === 0) {
+            input.nextElementSibling.textContent = '請輸入資料';
+            return false;
+        }
+    };
+</script> 

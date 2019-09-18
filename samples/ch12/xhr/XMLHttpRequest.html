@@ -1,0 +1,23 @@
+<button>取得表格</button>
+<div></div>
+
+<script type="module">
+    document
+        .querySelector('button')
+        .addEventListener('click', () => {
+            let request = new XMLHttpRequest();
+
+            request.onreadystatechange = function(evt) {
+                let xhr = evt.target;
+                if(xhr.readyState === XMLHttpRequest.DONE) {
+                    if(xhr.status === 200) {
+                        document.querySelector('div')
+                                .innerHTML = xhr.responseText;
+                    }
+                }
+            };
+
+            request.open('GET', 'XMLHttpRequest.txt');
+            request.send(null);
+        });
+</script>   

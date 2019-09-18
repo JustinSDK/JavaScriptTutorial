@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="module">
+        import interceptor from './mods/interceptor.js';
+
+        let target = {
+            doIt(data) {
+                return data.toUpperCase();
+            }
+        };
+
+        let proxy = interceptor('after', target, 
+            function(target, method, args, receiver, result) {
+                console.log('Target:', target);
+                console.log('Method:', method);
+                console.log('Arguments:', args);
+                console.log('Receiver:', receiver);
+                console.log('Result:', result);
+                return result;
+            }
+        );
+        proxy.doIt('process it');
+    </script>    
+</head>
+<body>
+</body>
+</html>

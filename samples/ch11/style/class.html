@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        .released {
+            border-width: 1px;
+            border-color: red;
+            border-style: dashed;
+        }
+
+        .pressed {
+            border-width: 5px;
+            border-color: black;
+            border-style: solid;
+        }
+    </style>
+
+</head>
+<body>
+
+  <img class='released' src="images/caterpillar.jpg">  
+
+<script type="module">
+    function switchClass(elem, clz1, clz2) {
+        let clzList = elem.classList;
+        if(clzList.contains(clz1)) {
+            clzList.replace(clz1, clz2);
+        }
+        else if(clzList.contains(clz2)) {
+            clzList.replace(clz2, clz1);
+        }
+    }
+
+    document.querySelector('img').addEventListener('click',
+        evt => switchClass(evt.target, 'released', 'pressed'), false);
+</script>  
+
+</body>
+</html>

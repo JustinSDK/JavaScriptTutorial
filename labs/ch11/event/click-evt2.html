@@ -1,0 +1,10 @@
+<script type="text/javascript">
+    function handle(elem) {
+        document.getElementById('console').textContent 
+            = `Who's clicked: ${elem.id}`;
+    }
+</script>
+
+<button id="btn1" onclick="handle(this);">按鈕一</button><br>
+<button id="btn2" onclick="handle(this);">按鈕二</button><br>
+<div id="console"></div>

@@ -1,0 +1,40 @@
+圖書：<br>
+<select>
+    <option>-- 選擇分類 --</option>
+    <option value="theory">理論基礎</option>
+    <option value="language">程式語言</option>
+    <option value="web">網頁技術</option>
+</select><br><br>
+採購：<div></div>
+
+<script type="module">    
+    function createSelect(xml) {
+        let select = document.createElement('select');
+        let options = xml.getElementsByTagName('option');
+        Array.from(options)
+             .map(option => {
+                return new Option(
+                    option.textContent, 
+                    option.getAttribute('value')
+                );
+             })
+             .forEach(option => select.add(option));     
+        return select;    
+    }
+
+    document
+        .querySelector('select')
+        .addEventListener('change', evt => {
+            let request = new XMLHttpRequest();
+            
+            request.onload = function(evt) {
+                // 實作範例
+            };
+
+            let time = Date.now();
+            let url = `books2?category=${evt.target.value}&time=${time}`;
+            request.open('GET', url);
+            request.send(null);
+
+        }, false);
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        div {
+            color: #ffffff;
+            background-color: #ff0000;
+            border-width: 10px;
+            border-color: black;
+            border-style: solid;
+            width: 100px;
+            height: 50px;
+            padding: 50px;
+        }
+    </style>  
+</head>
+<body>
+
+<button>切換顯示狀態</button>
+<hr>
+這是一些文字！這是一些文字！這是一些文字！這是一些文字！
+<div>訊息訊息訊息</div>
+這是其他文字！這是其他文字！這是其他文字！這是其他文字！
+
+<script type="module">
+
+    function style(elem, prop) {
+        return window.getComputedStyle(elem, null)[prop];
+    }
+    
+    document.querySelector('button').addEventListener('click', () => {
+        let message = document.querySelector('div');
+        if(style(message, 'visibility') === 'visible') {
+            message.style.visibility = 'hidden';
+        }
+        else {
+            message.style.visibility = 'visible';
+        }
+    });
+</script>  
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<input id="img-src" type="text"><br>
+<button id="add">新增圖片</button>
+<div id="images"></div>
+
+<script type="module">
+    import {elemsById, create} from './mods/XD-1.0.0.js';
+
+    elemsById('add').get().onclick = function() {
+        let img = create('img');
+        img.attr('src', elemsById('img-src').val())
+           .get()
+           .onclick = () => img.remove();
+            
+        elemsById('images').append(img);
+    };
+</script>

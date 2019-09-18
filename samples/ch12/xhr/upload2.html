@@ -1,0 +1,40 @@
+<form action="upload" method="post" enctype="multipart/form-data">
+    照片：<input type="file" name="photo"/><br>
+    <button>上傳</button>
+</form> 
+<progress value="0" max="100"></progress> <span></span>
+
+<script type="module">
+    import {XHR} from './mods/Ajax.js';
+  
+    function uploadProcess(xhr) {
+        let progress = document.querySelector("progress");
+        xhr.uploadXHR().addEvt('progress', evt => {
+            if(evt.lengthComputable) {
+                progress.value = evt.loaded / evt.total * 100;
+            }
+        })
+        .addEvt('loadend', evt => {
+            progress.value = 100;
+        });
+    }
+
+    document
+        .querySelector('button')
+        .addEventListener('click', evt => {
+            evt.preventDefault();
+            
+            let xhr = new XHR();
+            
+            uploadProcess(xhr);
+        
+            xhr.addEvt('load', evt => {
+                if(evt.target.status === 200) {
+                    document.querySelector('span')
+                            .innerHTML = '檔案上傳成功';
+                }            
+            })
+            .open('POST', 'upload')
+            .send(new FormData(document.querySelector('form')));
+        }, false);
+</script>

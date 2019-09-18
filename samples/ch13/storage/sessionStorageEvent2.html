@@ -1,0 +1,20 @@
+哈囉！<span name="username"></span><br>
+生日：<span name="birthday""></span>
+
+<script type="module">
+    window.addEventListener('storage', evt => {
+        document.querySelector(`span[name='${evt.key}']`).textContent = evt.newValue;
+    }, false);
+
+    let usernameSpan = document.querySelector("span[name='username']");
+    let birthdaySpan = document.querySelector("span[name='birthday']");
+
+    let username = sessionStorage.getItem('username');
+    let birthday = sessionStorage.getItem('birthday');
+    if(username) {
+        usernameSpan.textContent = username;    
+    }
+    if(birthday) {
+        birthdaySpan.textContent = birthday;    
+    }
+</script>

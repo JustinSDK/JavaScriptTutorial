@@ -1,0 +1,83 @@
+新增書籤：<br>
+網址：<input name="url" type="text">
+<span style="color:red"></span><br>
+名稱：<input name="name" type="text">
+
+<script type="module">    
+    function params(paraObj) {
+        return Object
+                .keys(paraObj)
+                .map(name => {
+                    let paraName = encodeURIComponent(name);
+                    let paraValue = encodeURIComponent(paraObj[name]);                         
+                    return `${paraName}=${paraValue}`.replace(/%20/g, '+');
+                })
+                .join('&');
+    }
+
+    class XHR {
+        constructor() {
+            let xhr = new XMLHttpRequest();
+
+            // 支援的事件類型
+            let evtTypes = ['loadstart', 'progress', 'abort', 'error', 'load', 'time', 'loadend'];
+
+            // 管理事件處理器的一組 Set
+            let handlers = evtTypes.reduce((handlers, evtType) => {
+                handlers[evtType] = new Set();
+                return handlers;
+            }, {});
+
+            evtTypes.forEach(evtType => {
+                xhr[`on${evtType}`] = function(evt) {
+                    // 逐一呼叫已註冊的處理器
+                    handlers[evtType].forEach(handler => handler.call(xhr, evt));
+                };
+            });
+
+            this.xhr = xhr;
+            this.handlers = handlers;
+        }
+
+        // 註冊事件處理器
+        addEvt(evtType, handler) {
+            this.handlers[evtType].add(handler);
+            return this;
+        }
+
+        // 移除事件處理器
+        removeEvt(evtType, handler) {
+            this.handlers[evtType].delete(handler);
+            return this;
+        }
+
+        // 封裝XMLHttpRequest的open()方法
+        // 如果指定了第三個參數，會自動進行URL編碼
+        open(method, url, paraObj,
+            async = true, username = null, password = null) {
+            let openUrl = paraObj ? `${url}?${params(paraObj)}` : url; 
+            this.xhr.open(method, openUrl, async, username, password);
+            return this;
+        }
+
+        // 封裝XMLHttpRequest的setRequestHeader()方法
+        addHeaders(headers) {
+            Object
+            .keys(headers)
+            .forEach(name => this.xhr.setRequestHeader(name, headers[name]));
+            return this;
+        }
+
+        // 封裝XMLHttpRequest的send()方法
+        send(body = null) {
+            this.xhr.send(body);
+            return this;
+        }
+    }   
+
+    document
+        .getElementsByName('url')[0]
+        .addEventListener('blur', evt => {
+            // 實作範例
+        }, false);
+</script>

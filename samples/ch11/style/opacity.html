@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+    <button id='fadeOut'>淡出</button>
+    <button id='fadeIn'>淡入</button><br>
+    <img src="images/caterpillar.jpg">  
+
+<script type="module">
+    function style(elem, prop) {
+        return window.getComputedStyle(elem, null)[prop];
+    }
+
+    // value 未指定時，用來取得不透明度
+    function opacity(elem, value) {
+        if(value === undefined) { 
+            let opt = style(elem, 'opacity');
+            return opt === '' ? 1 : Number(opt);
+        } else {
+            elem.style.opacity = value;
+        }
+    }
+
+    let previousOpacities = new WeakMap();
+
+    // speed 是淡出總時間，step 是動畫數
+    function fadeOut(elem, speed = 5000, steps = 10) {
+        previousOpacities.set(elem, opacity(elem));
+
+        let opt = previousOpacities.get(elem);
+        let timeInterval = speed / steps;
+        let valueStep = opt / steps;
+
+        setTimeout(function next() {
+            opt -= valueStep;
+            if(opt > 0) {
+                opacity(elem, opt);
+                setTimeout(next, timeInterval);
+            }
+            else {
+                opacity(elem, 0);
+            }
+        }, timeInterval);
+    }     
+
+    // speed 是淡入總時間，step 是動畫數
+    function fadeIn(elem, speed = 5000, steps = 10) {
+        let targetValue = previousOpacities.get(elem) || 1;
+        previousOpacities.delete(elem);
+
+        let timeInterval = speed / steps;
+        let valueStep = targetValue / steps;
+
+        let opt = 0;
+        setTimeout(function next() {
+            opt += valueStep;
+            if(opt < targetValue) {
+                opacity(elem, opt);
+                setTimeout(next, timeInterval);
+            }
+            else {
+                opacity(elem, targetValue);
+            }
+        }, timeInterval);
+    }     
+
+    let image = document.querySelector('img');
+
+    document.getElementById('fadeIn')
+            .addEventListener('click', 
+                () => fadeIn(image, 2000), false);
+
+    document.getElementById('fadeOut')
+            .addEventListener('click', 
+                () => fadeOut(image, 2000), false);
+</script>
+
+  </body>
+</html>

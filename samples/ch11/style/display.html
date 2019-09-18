@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        div {
+            color: #ffffff;
+            background-color: #ff0000;
+            border-width: 10px;
+            border-color: black;
+            border-style: solid;
+            width: 100px;
+            height: 50px;
+            padding: 50px;
+        }
+    </style>  
+</head>
+<body>
+
+<button>切換顯示狀態</button>
+<hr>
+這是一些文字！這是一些文字！這是一些文字！這是一些文字！
+<div>訊息訊息訊息</div>
+這是其他文字！這是其他文字！這是其他文字！這是其他文字！
+
+<script type="module">
+
+    function style(elem, prop) {
+        return window.getComputedStyle(elem, null)[prop];
+    }
+
+    let previousDisplays = new WeakMap();
+    
+    function none(elem) {
+        previousDisplays.set(elem, style(elem, 'display'));
+        elem.style.display = 'none';
+    }
+
+    function display(elem) {
+        if(previousDisplays.has(elem)) {
+            elem.style.display = previousDisplays.get(elem);
+            previousDisplays.delete(elem);
+        }
+        else if(style(elem, 'display') === 'none') {
+            // 在 DOM 樹上建立元素，取得 display 預設值後移除
+            let node = document.createElement(elem.nodeName);
+            document.body.appendChild(node);
+            elem.style.display = style(node, 'display');
+            document.body.removeChild(node);
+        }
+    }
+
+    document.querySelector('button').addEventListener('click', () => {
+        let message = document.querySelector('div');
+        if(style(message, 'display') === 'none') {
+            display(message);
+        }
+        else {
+            none(message);
+        }
+    });
+</script>  
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+訊息：<input>
+<div></div>
+
+<script type="module">
+    let div = document.querySelector('div');
+    let ws = new WebSocket('ws://localhost:8080/ws/foo');
+    ws.onmessage = function(evt) {
+        div.innerHTML += `${evt.data}<br>`;
+    };
+
+    document.querySelector('input')
+            .addEventListener('keydown', evt => {
+                if(evt.keyCode == 13) {
+                    ws.send(evt.target.value);
+                    evt.target.value = '';
+                }
+            }, false);
+</script>

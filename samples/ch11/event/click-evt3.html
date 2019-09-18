@@ -1,0 +1,14 @@
+<button id="btn1">按鈕一</button><br>
+<button id="btn2">按鈕二</button><br>
+<div></div>
+
+<script type="module">
+    function handler(evt) {
+        document.querySelector('div').textContent 
+            = `Who's clicked: ${evt.currentTarget.id}`;
+    }
+    document.getElementById('btn1')
+            .addEventListener('click', handler, false);
+    document.getElementById('btn2')
+            .addEventListener('click', handler, false);
+</script>

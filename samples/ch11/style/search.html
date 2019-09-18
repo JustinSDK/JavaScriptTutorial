@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+         #container {
+             color: #ffffff;
+             background-color: #ff0000;
+             height: 50px;
+             position: absolute;
+         }
+    </style>
+</head>
+<body>
+
+    <div id="container">這是一段訊息</div>
+    <hr>
+    搜尋：<input id="search" type="text">
+
+<script type="module">
+    function offset(elem) {
+        let x = 0;
+        let y = 0;
+        while(elem) {
+            x += elem.offsetLeft;
+            y += elem.offsetTop;
+            elem = elem.offsetParent;
+        }
+
+        return { 
+            x, 
+            y, 
+            toString() {
+                return `(${this.x}, ${this.y})`;
+            }
+        };
+    }
+
+    let input = document.getElementById('search');
+    let search = offset(input);
+    let container = document.getElementById('container');
+    container.style.left = `${search.x}px`;
+    container.style.top = `${search.y + input.offsetHeight}px`;
+    container.style.width = `${input.offsetWidth}px`;
+</script>
+
+</body>
+</html>

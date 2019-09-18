@@ -1,0 +1,42 @@
+<script type="module">
+    function setItem(storage, key, value) {
+        storage.setItem(key, value);
+    }
+
+    function hasItem(storage, key) {
+        return storage.getItem(key) !== null;
+    }
+
+    function getItem(storage, key) {
+        return storage.getItem(key);
+    }
+
+    function keys(storage) {
+        let keys = [];
+        for(let i = 0; i < storage.length; i++) {
+            keys.push(storage.key(i));
+        }
+        return keys;
+    }
+
+    function values(storage) {
+        return keys(storage)
+                  .map(key => localStorage.getItem(key));
+    }
+
+    function all(storage) {
+        return keys(storage)
+                   .map(key => {
+                       return {key, value: storage.getItem(key)};
+                   });
+    }
+
+    setItem(localStorage, 'user1', 'justin');
+    setItem(localStorage, 'user2', 'monica');
+
+    console.log(hasItem(localStorage, 'user1'));
+    console.log(getItem(localStorage, 'user1'));
+    console.log(keys(localStorage));
+    console.log(values(localStorage));
+    console.log(all(localStorage));
+</script>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        #message1 {
+            color: #ffffff;
+            background-color: #ff0000;
+            border-width: 10px;
+            border-color: black;
+            border-style: solid;
+            width: 100px;
+            height: 50px;
+            padding: 50px;
+            margin: 10px;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            z-index: 0;                
+        }
+
+        #message2 {
+            color: #ffffff;
+            background-color: #ff0000;
+            border-width: 10px;
+            border-color: black;
+            border-style: solid;
+            width: 100px;
+            height: 50px;
+            padding: 50px;
+            margin: 10px;
+            position: absolute;
+            top: 150px;
+            left: 150px;
+            z-index: 0;                
+        }
+    </style>
+</head>
+<body>
+
+<div id="message1">這是訊息一</div>
+<div id="message2">這是訊息二</div>
+
+<script type="module">
+    let message1 = document.getElementById('message1');
+    let message2 = document.getElementById('message2');
+
+    document.addEventListener('click', evt => {
+        message1.style.left = `${evt.clientX}px`;
+        message1.style.top = `${evt.clientY}px`;
+    }, false);
+
+    message1.addEventListener('click', evt => {
+        message1.style.zIndex = 1;
+        message2.style.zIndex = 0;
+        evt.stopPropagation();
+    }, false);
+
+    message2.addEventListener('click', evt => {
+        message2.style.zIndex = 1;
+        message1.style.zIndex = 0;
+        evt.stopPropagation();
+    }, false);
+</script>   
+
+</body>
+</html>

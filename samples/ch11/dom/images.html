@@ -1,0 +1,19 @@
+<input id="img-src" type="text"><br>
+<button id="add">新增圖片</button>
+<div id="images"></div>
+
+<script type="module">
+    function byId(id) {
+        return document.getElementById(id);
+    }
+
+    byId('add').onclick = function() {
+        let img = document.createElement('img');
+        img.src = byId('img-src').value;
+        img.onclick = function() {
+            byId('images').removeChild(this);
+        };
+
+        byId('images').appendChild(img);
+    };
+</script>

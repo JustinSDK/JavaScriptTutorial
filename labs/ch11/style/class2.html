@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        .released {
+            border-width: 1px;
+            border-color: red;
+            border-style: dashed;
+        }
+
+        .pressed {
+            border-width: 5px;
+            border-color: black;
+            border-style: solid;
+        }
+    </style>
+
+</head>
+<body>
+
+<img class='released' src="images/caterpillar.jpg">  
+
+<script type="module">
+    import {elemsByTag} from './mods/XD-1.2.0.js';
+
+    let logo = elemsByTag('img');
+    logo.addEvt('click', evt => {
+        logo.switchClass('released', 'pressed');
+    });
+</script>  
+
+</body>
+</html>

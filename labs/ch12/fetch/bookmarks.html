@@ -1,0 +1,23 @@
+新增書籤：<br>
+網址：<input name="url" type="text">
+<span style="color:red"></span><br>
+名稱：<input name="name" type="text">
+
+<script type="module">    
+    function params(paraObj) {
+        return Object
+                .keys(paraObj)
+                .map(name => {
+                    let paraName = encodeURIComponent(name);
+                    let paraValue = encodeURIComponent(paraObj[name]);                         
+                    return `${paraName}=${paraValue}`.replace(/%20/g, '+');
+                })
+                .join('&');
+    }
+
+    document
+        .getElementsByName('url')[0]
+        .addEventListener('blur', async evt => {
+            // 實作範例
+        }, false);
+</script>

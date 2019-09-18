@@ -1,0 +1,21 @@
+<form action="upload" method="post" enctype="multipart/form-data">
+    照片：<input type="file" name="photo"/><br>
+    <button>上傳</button>
+</form> 
+<progress value="0" max="100"></progress> <span></span>
+
+<script type="module">
+    import {XHR} from './mods/Ajax.js';
+  
+    function uploadProcess(xhr) {
+        // 實作範例
+    }
+
+    document
+        .querySelector('button')
+        .addEventListener('click', evt => {
+            evt.preventDefault();
+            
+           // 實作範例
+        }, false);
+</script>

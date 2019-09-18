@@ -1,0 +1,57 @@
+留言：<input size="40">
+<hr>
+<div name="container"></div>
+
+<script type="module">
+    import messageBoard from './mods/message-board.js';
+    
+    (async function() {
+        let board = await messageBoard('messageBoard');
+
+        async function clickHandler(evt) {
+            let currentTarget = evt.currentTarget;
+            let id = Number(currentTarget.id);
+            let message = currentTarget.firstElementChild.value;
+            switch(evt.target.name) {
+                case 'update':
+                    board.update(id, message);
+                    showMessages(await board.allMessages());
+                    break;
+                case 'delete':
+                    board.delete(id);
+                    showMessages(await board.allMessages());                        
+                    break;
+            }
+        }
+
+        showMessages(await board.allMessages());
+
+        function showMessages(messages) {
+            document.querySelector('div[name]').innerHTML = 
+                messages.map(message => {
+                    let date = new Date(message.time).toString().split(/GMT/)[0];
+                    return `<div id="${message.id}">` +
+                        `<input size="40" value="${message.blabla}"> ` + 
+                        `<button name="update">更新</button> ` + 
+                        `<button name="delete">刪除</button> ` + 
+                        `<span>${date}</span>` +
+                        '</div>';
+                }).join('');
+
+            document.querySelectorAll('div[id]')
+                    .forEach(div => {
+                        div.addEventListener('click', clickHandler, false);
+                    });
+        }
+
+        document.querySelector('input')
+                .addEventListener('keydown', async evt => {
+                    if(evt.keyCode == 13 && evt.target.value !== '') {
+                        board.add(evt.target.value);
+                        evt.target.value = '';
+                        showMessages(await board.allMessages());
+                    }
+                }, false);
+    })();
+    
+</script>

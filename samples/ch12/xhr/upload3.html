@@ -1,0 +1,24 @@
+<form action="upload" method="post" enctype="multipart/form-data">
+    照片：<input type="file" name="photo"/><br>
+    <button>上傳</button>
+</form> 
+<span></span>
+
+<script type="module">
+    import {elemsByTag} from './mods/XD-1.2.0.js';
+    import http from './mods/Ajax.js';
+
+    elemsByTag('button')
+        .addEvt('click', async evt => {
+            evt.preventDefault();
+
+            let loadEvt = await http('POST', 'upload', {
+                body: new FormData(elemsByTag('form').get())
+            });
+
+            let xhr = loadEvt.target;
+            if(xhr.status === 200) {
+                elemsByTag('span').html('檔案上傳成功');
+            }  
+        });
+</script>

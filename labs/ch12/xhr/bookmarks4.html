@@ -1,0 +1,25 @@
+新增書籤：<br>
+網址：<input name="url" type="text">
+<span style="color:red"></span><br>
+名稱：<input name="name" type="text">
+
+<script type="module">    
+    import {elemsByName, elemsByTag} from './mods/XD-1.2.0.js'; 
+    import {params, post} from './mods/Ajax.js';
+
+    elemsByName('url')
+        .addEvt('blur', async evt => {
+            let headers = {
+                'Content-Type' : 'application/x-www-form-urlencoded'
+            };
+            let body = {
+                url : elemsByName('url').val()
+            };
+
+            let loadEvt = await post('bookmarks', {headers, body});            
+            let xhr = loadEvt.target;
+            if(xhr.status === 200) {
+                elemsByTag('span').html(xhr.responseText === 'true' ? 'URL 已存在' : '');
+            }  
+        });
+</script>

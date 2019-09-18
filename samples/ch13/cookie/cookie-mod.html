@@ -1,0 +1,20 @@
+<script type="module">
+    import * as cookie from './mods/cookie.js'
+
+    cookie.set('user1', 'justin', {
+        expires: Date.now() + 7 * 86400000
+    });
+
+    cookie.set('user2', 'monica', {
+        expires: Date.now() + 7 * 86400000
+    });
+
+    console.log(cookie.has('user1'));
+    console.log(cookie.get('user1'));
+    console.log(cookie.keys());
+    console.log(cookie.values());
+    console.log(cookie.all());
+
+    cookie.remove('user1');
+    cookie.remove('user2');
+</script>

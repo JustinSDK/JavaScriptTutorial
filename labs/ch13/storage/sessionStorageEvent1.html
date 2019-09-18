@@ -1,0 +1,27 @@
+名稱：<input name="username">
+生日：<input name="birthday" type="date">
+<hr>
+
+<iframe src="sessionStorageEvent2.html"></iframe>
+
+<script type="module">
+    let usernameInput = document.querySelector("input[name='username']");
+    let birthdayInput = document.querySelector("input[name='birthday']");
+
+    usernameInput.addEventListener('blur', evt => {
+        sessionStorage.setItem('username', evt.target.value);
+    }, false);
+
+    birthdayInput.addEventListener('blur', evt => {
+        sessionStorage.setItem('birthday', evt.target.value);
+    }, false);
+
+    let username = sessionStorage.getItem('username');
+    let birthday = sessionStorage.getItem('birthday');
+    if(username) {
+        usernameInput.value = username;    
+    }
+    if(birthday) {
+        birthdayInput.value = birthday;    
+    }
+</script>

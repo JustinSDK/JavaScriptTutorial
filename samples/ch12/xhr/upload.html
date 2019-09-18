@@ -1,0 +1,84 @@
+<form action="upload" method="post" enctype="multipart/form-data">
+    照片：<input type="file" name="photo"/><br>
+    <button>上傳</button>
+</form> 
+<span></span>
+
+<script type="module">
+    function params(paraObj) {
+        return Object
+                .keys(paraObj)
+                .map(name => {
+                    let paraName = encodeURIComponent(name);
+                    let paraValue = encodeURIComponent(paraObj[name]);                         
+                    return `${paraName}=${paraValue}`.replace(/%20/g, '+');
+                })
+                .join('&');
+    }
+
+    class XHR {
+        constructor() {
+            let xhr = new XMLHttpRequest();
+
+            let handlers = {
+                'readystatechange' : new Set(),
+                'load' : new Set()
+            };
+
+            xhr.onreadystatechange = function(evt) {
+                handlers['readystatechange']
+                    .forEach(handler => handler.call(xhr, evt));
+            };
+
+            xhr.onload = function(evt) {
+                handlers['load']
+                    .forEach(handler => handler.call(xhr, evt));
+            };
+
+            this.xhr = xhr;
+            this.handlers = handlers;
+        }
+
+        addEvt(evtType, handler) {
+            this.handlers[evtType].add(handler);
+            return this;
+        }
+
+        removeEvt(evtType, handler) {
+            this.handlers[evtType].delete(handler);
+            return this;
+        }
+
+        open(method, url, query, async = true, username = null, password = null) {
+            let openUrl = query ? `${url}?${params(query)}` : url; 
+            this.xhr.open(method, openUrl, async, username, password);
+            return this;
+        }
+
+        addHeaders(headers) {
+            Object.keys(headers)
+                  .forEach(name => this.xhr.setRequestHeader(name, headers[name]));
+            return this;
+        }
+
+        send(body = null) {
+            this.xhr.send(body);
+            return this;
+        }
+    }
+
+    document
+        .querySelector('button')
+        .addEventListener('click', evt => {
+            evt.preventDefault();
+
+            new XHR().addEvt('load', evt => {
+                if(evt.target.status === 200) {
+                    document.querySelector('span')
+                            .innerHTML = '檔案上傳成功';
+                }            
+            })
+            .open('POST', 'upload')
+            .send(new FormData(document.querySelector('form')));
+        }, false);
+</script>

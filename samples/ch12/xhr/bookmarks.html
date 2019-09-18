@@ -1,0 +1,42 @@
+新增書籤：<br>
+網址：<input name="url" type="text">
+<span style="color:red"></span><br>
+名稱：<input name="name" type="text">
+
+<script type="module">    
+    // 組合與編碼請求參數
+    function params(paraObj) {
+        return Object
+                .keys(paraObj)
+                .map(name => {
+                    let paraName = encodeURIComponent(name);
+                    let paraValue = encodeURIComponent(paraObj[name]);                         
+                    return `${paraName}=${paraValue}`.replace(/%20/g, '+');
+                })
+                .join('&');
+    }
+
+    function get(url, ok) {
+        let request = new XMLHttpRequest();
+        request.onload = function() {
+            if(request.status === 200) {
+                ok(request);
+            }
+        };
+        request.open('GET', url); 
+        request.send(null);  
+    }
+
+    document
+        .getElementsByName('url')[0]
+        .addEventListener('blur', evt => {
+            let query = params({ 
+                url: evt.target.value,
+                time: Date.now()
+            });
+            get(`bookmarks?${query}`, xhr => {
+                document.querySelector('span').innerHTML = 
+                    xhr.responseText === 'true' ? 'URL 已存在' : '';
+            });
+        }, false);
+</script>

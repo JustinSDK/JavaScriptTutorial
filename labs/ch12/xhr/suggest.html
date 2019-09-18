@@ -1,0 +1,27 @@
+<hr>
+搜尋：<input list="word">
+<datalist id="word"></datalist>
+
+<script type="module">
+    import x from './mods/XD-1.2.0.js';
+    import {XHR} from './mods/Ajax.js';
+
+    let doc = x(document);
+    let input = doc.elemsByTag('input');
+
+    input.addEvt('keyup', evt => {
+        let keyword = input.val();
+         // 沒有輸入值，直接結束
+        if(keyword === '') {
+            return;
+        }
+
+        new XHR()
+          .responseType('json')
+          .addEvt('load', evt => {
+              // 實作範例
+          })
+          .open('GET', 'suggest', {keyword})
+          .send();
+    });
+</script>

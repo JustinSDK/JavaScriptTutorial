@@ -1,0 +1,39 @@
+圖書：<br>
+<select id="category">
+    <option>-- 選擇分類 --</option>
+    <option value="theory">理論基礎</option>
+    <option value="language">程式語言</option>
+    <option value="web">網頁技術</option>
+</select><br><br>
+採購：<div id="book"></div>
+<script type="module">
+    function createOption(value, text) {
+        let option = document.createElement('option');
+        option.value = value;
+        option.text = text;
+        return option;
+    }
+
+    let shelve = {
+        'theory'   : ['常見演算', '電腦圖學', '設計模式'],
+        'language' : ['C 語言', 'C++', 'Java', 'Python', 'JavaScript'],
+        'web'      : ['Servlet', 'JSP', 'Struts', 'Spring MVC']
+    };
+            
+    document.getElementById('category').addEventListener('change', evt => {
+        let bookDiv = document.getElementById('book');
+        
+        if(bookDiv.firstChild) {
+            bookDiv.removeChild(bookDiv.firstChild);
+        }
+    
+        let select = document.createElement('select');
+        let books = shelve[evt.target.value];
+        books.forEach(name => {
+            select.appendChild(createOption(name, name));
+        });
+        
+        bookDiv.appendChild(select);
+    }, false);
+        
+</script> 

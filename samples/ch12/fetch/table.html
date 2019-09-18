@@ -1,0 +1,12 @@
+<button>取得表格</button>
+<div></div>
+
+<script type="module">
+    document
+        .querySelector('button')
+        .addEventListener('click', async () => {
+            let resp = await fetch('XMLHttpRequest.txt');
+            let text = await resp.text();
+            document.querySelector('div').innerHTML = text;
+        });
+</script>   

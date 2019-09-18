@@ -1,0 +1,22 @@
+<span id="console"></span>
+<div id="cmd"></div>
+<input name="age">
+<input name="age">
+
+<script type="module">
+    import x from './mods/XD-1.0.0.js';
+
+    let doc = x(document);
+
+    doc.elemsById('console', 'cmd').html('<b>Hello, World</b>');
+
+    console.log(doc.elemsBySelector('#console').html());
+
+    doc.elemsByTag('span', 'div')
+       .attr('class', 'red')
+       .html('<i>Red Color</i>');
+
+    doc.elemsByName('age')
+       .val('44')
+       .each(elem => console.log(elem.value));
+</script>

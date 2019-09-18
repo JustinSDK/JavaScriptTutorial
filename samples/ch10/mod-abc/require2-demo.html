@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script type="text/javascript" src="js/require2.js"></script>
+    <script type="text/javascript" src="js/openhome.js"></script>
+    <script type="text/javascript" src="js/caterpillar.js"></script>
+    <script type="text/javascript">
+        require(['openhome', 'caterpillar'], function(openhome, caterpillar) {
+            openhome.validate();
+            openhome.format();
+            caterpillar.validate();
+        });
+    </script>
+</body>
+</html>

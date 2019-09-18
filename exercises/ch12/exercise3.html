@@ -1,0 +1,21 @@
+圖書：<br>
+<select>
+    <option>-- 選擇分類 --</option>
+    <option value="theory">理論基礎</option>
+    <option value="language">程式語言</option>
+    <option value="web">網頁技術</option>
+</select><br><br>
+採購：<div></div>
+
+<script type="module">    
+    document
+        .querySelector('select')
+        .addEventListener('change', async evt => {
+            let time = Date.now();
+            let resp = await fetch(`/xhr/books2?category=${evt.target.value}&time=${time}`);
+            let text = await resp.text();
+            
+            let div = document.querySelector('div');
+            div.innerHTML = text;
+        }, false);
+</script>

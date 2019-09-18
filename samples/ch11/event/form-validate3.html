@@ -1,0 +1,15 @@
+<form name="form1" action="nothing">
+    輸入資料：<input name="data"> <span></span><br>
+    <button type="submit">送出</button>
+</form>  
+
+<script type="module">
+    document.querySelector('form')
+        .addEventListener('submit', evt => {
+            let input = evt.currentTarget.data;
+            if(input.value.length === 0) {
+                input.nextElementSibling.textContent = '請輸入資料';
+                evt.preventDefault();
+            }
+        }, false);
+</script> 

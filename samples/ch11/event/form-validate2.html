@@ -1,0 +1,14 @@
+<script type="text/javascript">
+    function validate(form) {
+        let input = form.data;
+        if(input.value.length === 0) {
+            input.nextElementSibling.textContent = '請輸入資料';
+            return false;
+        }
+    };
+</script> 
+
+<form name="form1" onsubmit="return validate(this);" action="nothing">
+    輸入資料：<input name="data"> <span></span><br>
+    <button type="submit">送出</button>
+</form>  

@@ -1,0 +1,8 @@
+即時資料: <span>0</span>
+
+<script type="module">
+    new EventSource("number")
+      .addEventListener('message', evt => {
+          document.querySelector('span').innerHTML =  evt.data
+      }, false);
+</script>      

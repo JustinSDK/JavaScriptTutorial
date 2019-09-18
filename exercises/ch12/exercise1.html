@@ -1,0 +1,22 @@
+<form action="upload" method="post" enctype="multipart/form-data">
+    照片：<input type="file" name="photo"/><br>
+    <button>上傳</button>
+</form> 
+<span></span>
+
+<script type="module">
+    document
+        .querySelector('button')
+        .addEventListener('click', async evt => {
+            evt.preventDefault();
+
+            let resp = await fetch('xhr/upload', {
+                method: 'POST',
+                body: new FormData(document.querySelector('form'))
+            });
+
+            if(resp.status === 200) {
+                document.querySelector('span').innerHTML = '檔案上傳成功';
+            }            
+        }, false);
+</script>

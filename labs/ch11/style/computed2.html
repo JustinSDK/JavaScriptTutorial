@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        div {
+            background-color: #ff0000; 
+            width: 200px; 
+            height: 100px; 
+        }
+    </style>
+</head>
+<body>
+    <div style="padding-left: 50px; padding-top: 50px;">這是一段訊息</div>
+    <span></span>
+    <script type="module">
+        import {elemsByTag} from './mods/XD-1.2.0.js';
+
+        let div = elemsByTag('div');
+        let divColor = div.computedStyle('color');
+        let divBkColor = div.computedStyle('backgroundColor');
+        let divPaddingLeft = div.computedStyle('paddingLeft'); 
+        
+        elemsByTag('span').html( 
+            `color: ${divColor}<br>` +
+            `backgroundColor: ${divBkColor}<br>` +
+            `paddingLeft: ${divPaddingLeft}`
+        );
+    </script>
+</body>
+</html>

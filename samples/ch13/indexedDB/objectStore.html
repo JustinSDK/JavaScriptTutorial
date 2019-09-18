@@ -1,0 +1,20 @@
+<script type="module">
+    let openRequest = indexedDB.open('demo', 1);
+    openRequest.onupgradeneeded = function(evt) {
+        let db = evt.target.result;
+        if(!db.objectStoreNames.contains('messages')) {
+            let objectStore = db.createObjectStore(
+                'messages', {
+                    keyPath: 'id', 
+                    autoIncrement: true
+                }
+            );
+            objectStore.createIndex('byTime', 
+                'time', {unique: false}
+            );
+            objectStore.createIndex('byBlabla', 
+                'blabla', {unique: false}
+            );            
+        }
+    };
+</script>

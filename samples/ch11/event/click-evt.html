@@ -1,0 +1,12 @@
+<button id="btn1">按鈕一</button><br>
+<button id="btn2">按鈕二</button><br>
+<div></div>
+
+<script type="module">
+    function handler() {
+        document.querySelector('div').textContent 
+            = `Who's clicked: ${this.id}`;
+    }
+    document.getElementById('btn1').onclick = handler;
+    document.getElementById('btn2').onclick = handler;
+</script>
