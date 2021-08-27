@@ -1,12 +1,36 @@
 《JavaScript 技術手冊》堪誤
 
+# P02-06
+
+![P02-06](images/P02-06.JPG)
+
+# P02-12
+
+![P02-12](images/P02-12.JPG)
+
+# P02-35
+
+![P02-35](images/P02-35.JPG)
+
 # P03-11
 
 ![P03-11](images/P03-11.JPG)
 
+# P03-24
+
+![P03-24](images/P03-24.JPG)
+
 # P03-45
 
 ![P03-45](images/P03-45.JPG)
+
+# P04-19
+
+![P04-19](images/P04-19.JPG)
+
+# P04-22
+
+![P04-22](images/P04-22.JPG)
 
 # P05-05
 
@@ -32,6 +56,10 @@
 
 ![P08-39](images/P08-39.JPG)
 
+# P08-40
+
+![P08-40](images/P08-40.JPG)
+
 # P09-16
 
 ![P09-16](images/P09-16.JPG)
@@ -48,6 +76,18 @@
 
 ![P11-11](images/P11-11.JPG)
 
+# P11-13
+
+![P11-13](images/P11-13.JPG)
+
+# P11-15
+
+![P11-15](images/P11-15.JPG)
+
+# P11-16
+
+![P11-16](images/P11-16.JPG)
+
 # P11-37
 
 ![P11-37](images/P11-37.JPG)
@@ -63,3 +103,8 @@
 # P12-06
 
 ![P12-06](images/P12-06.JPG)
+
+# P12-11
+
+![P12-11](images/P12-11.JPG)
+
